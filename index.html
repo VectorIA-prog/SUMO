@@ -6,6 +6,7 @@
 <title>SUMO — Conectamos oficios con personas que necesitan arreglos en su casa</title>
 <meta name="description" content="SUMO conecta plomeros, electricistas, carpinteros y más con personas que necesitan resolver arreglos en su casa. CABA, Neuquén y Rosario. Registrate gratis." />
 <meta name="theme-color" content="#F4EFE6" />
+<meta name="color-scheme" content="light" />
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +15,7 @@
 
 <style>
 :root {
+  color-scheme: light;
   /* Palette — warm editorial cream with the electric blue from the SUMO logo */
   --cream: #F4EFE6;
   --cream-soft: #EAE3D2;
@@ -894,6 +896,7 @@ section { position: relative; }
   color: var(--cream);
   transform: translateY(-4px);
 }
+.oficio:hover h3 { color: var(--cream); }
 .oficio:hover .oficio__icon { color: var(--blue); }
 .oficio__icon {
   width: 40px; height: 40px;
@@ -2090,6 +2093,104 @@ footer {
   </div>
 </section>
 
+<!-- ===== COMPARADOR ===== -->
+<section class="section-pad" style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span>Antes y después</div>
+      <h2>La diferencia entre <em>buscar</em> y <em>encontrar.</em></h2>
+      <p>Lo que cambia cuando dejás de pelearte con grupos de WhatsApp y empezás a usar SUMO.</p>
+    </div>
+    <div class="compare reveal">
+      <div class="compare__head">
+        <div class="compare__col-head compare__col-head--bad">
+          <h3>Sin SUMO</h3>
+          <span class="compare__tag">El método viejo</span>
+        </div>
+        <div class="compare__col-head compare__col-head--good">
+          <h3>Con <em>SUMO</em></h3>
+          <span class="compare__tag">A un toque</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span><strong>Días o semanas</strong> buscando en grupos del barrio</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span><strong>Minutos</strong> para encontrar al indicado</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>Recomendaciones <strong>anónimas</strong> y poco confiables</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span><strong>Reseñas reales</strong> de clientes verificados</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>No sabés <strong>a quién</strong> estás metiendo en tu casa</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Profesionales <strong>verificados</strong> con identidad chequeada</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>Coordinación por <strong>mil canales</strong> (WhatsApp, llamadas, mails)</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Todo en <strong>una sola app</strong>, con historial</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>Pagás <strong>sin saber</strong> cómo va a quedar el trabajo</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Calificás <strong>al final</strong> y construís comunidad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== OFICIOS ===== -->
 <section id="oficios" class="section-pad" style="padding-top:0">
   <div class="container">
@@ -2201,104 +2302,6 @@ footer {
             <h4>Match inteligente</h4>
             <p>Te conectamos según ubicación, disponibilidad y especialidad. Cero pérdida de tiempo.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COMPARADOR ===== -->
-<section class="section-pad" style="padding-top:0">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow"><span class="dot"></span>Antes y después</div>
-      <h2>La diferencia entre <em>buscar</em> y <em>encontrar.</em></h2>
-      <p>Lo que cambia cuando dejás de pelearte con grupos de WhatsApp y empezás a usar SUMO.</p>
-    </div>
-    <div class="compare reveal">
-      <div class="compare__head">
-        <div class="compare__col-head compare__col-head--bad">
-          <h3>Sin SUMO</h3>
-          <span class="compare__tag">El método viejo</span>
-        </div>
-        <div class="compare__col-head compare__col-head--good">
-          <h3>Con <em>SUMO</em></h3>
-          <span class="compare__tag">A un toque</span>
-        </div>
-      </div>
-
-      <div class="compare__row">
-        <div class="compare__cell compare__cell--bad">
-          <span class="compare__icon compare__icon--bad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </span>
-          <span><strong>Días o semanas</strong> buscando en grupos del barrio</span>
-        </div>
-        <div class="compare__cell compare__cell--good">
-          <span class="compare__icon compare__icon--good">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span><strong>Minutos</strong> para encontrar al indicado</span>
-        </div>
-      </div>
-
-      <div class="compare__row">
-        <div class="compare__cell compare__cell--bad">
-          <span class="compare__icon compare__icon--bad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </span>
-          <span>Recomendaciones <strong>anónimas</strong> y poco confiables</span>
-        </div>
-        <div class="compare__cell compare__cell--good">
-          <span class="compare__icon compare__icon--good">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span><strong>Reseñas reales</strong> de clientes verificados</span>
-        </div>
-      </div>
-
-      <div class="compare__row">
-        <div class="compare__cell compare__cell--bad">
-          <span class="compare__icon compare__icon--bad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </span>
-          <span>No sabés <strong>a quién</strong> estás metiendo en tu casa</span>
-        </div>
-        <div class="compare__cell compare__cell--good">
-          <span class="compare__icon compare__icon--good">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span>Profesionales <strong>verificados</strong> con identidad chequeada</span>
-        </div>
-      </div>
-
-      <div class="compare__row">
-        <div class="compare__cell compare__cell--bad">
-          <span class="compare__icon compare__icon--bad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </span>
-          <span>Coordinación por <strong>mil canales</strong> (WhatsApp, llamadas, mails)</span>
-        </div>
-        <div class="compare__cell compare__cell--good">
-          <span class="compare__icon compare__icon--good">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span>Todo en <strong>una sola app</strong>, con historial</span>
-        </div>
-      </div>
-
-      <div class="compare__row">
-        <div class="compare__cell compare__cell--bad">
-          <span class="compare__icon compare__icon--bad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </span>
-          <span>Pagás <strong>sin saber</strong> cómo va a quedar el trabajo</span>
-        </div>
-        <div class="compare__cell compare__cell--good">
-          <span class="compare__icon compare__icon--good">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span>Calificás <strong>al final</strong> y construís comunidad</span>
         </div>
       </div>
     </div>
