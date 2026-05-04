@@ -736,20 +736,45 @@ section { position: relative; }
 }
 .step {
   background: var(--cream);
-  padding: 44px 36px 40px;
+  padding: 36px 36px 40px;
   position: relative;
   transition: background 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 .step:hover { background: var(--cream-soft); }
+.step__visual {
+  width: 100%;
+  height: 140px;
+  margin-bottom: 24px;
+  background: var(--cream-soft);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.step:hover .step__visual {
+  background: var(--cream);
+  border-color: var(--blue);
+}
+.step__visual svg {
+  width: 70%;
+  max-width: 200px;
+  height: auto;
+}
 .step__num {
   font-family: var(--display);
   font-style: italic;
-  font-size: 64px;
+  font-size: 56px;
   font-weight: 300;
   font-variation-settings: "opsz" 144, "SOFT" 100;
   color: var(--blue);
   line-height: 1;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
 }
 .step h3 {
   font-size: 26px;
@@ -761,13 +786,85 @@ section { position: relative; }
   font-size: 15.5px;
   line-height: 1.55;
 }
-.step__icon {
-  position: absolute;
-  top: 36px;
-  right: 36px;
-  width: 36px; height: 36px;
-  color: var(--ink);
-  opacity: 0.3;
+
+/* === Step 1 animation: search bar with typing cursor === */
+.viz-search-cursor {
+  animation: cursorBlink 1s step-end infinite;
+}
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+.viz-search-line {
+  stroke-dasharray: 30;
+  animation: typeLine 4s ease-in-out infinite;
+}
+@keyframes typeLine {
+  0% { stroke-dashoffset: 30; }
+  40% { stroke-dashoffset: 0; }
+  60% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 30; }
+}
+.viz-magnify {
+  transform-origin: center;
+  animation: magnifyFloat 3s ease-in-out infinite;
+}
+@keyframes magnifyFloat {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(2px, -2px) rotate(-8deg); }
+}
+
+/* === Step 2 animation: two avatars connecting with pulse === */
+.viz-pulse-dot {
+  animation: pulseTraverse 2.4s ease-in-out infinite;
+}
+@keyframes pulseTraverse {
+  0% { transform: translateX(-30px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(30px); opacity: 0; }
+}
+.viz-avatar-pulse {
+  transform-origin: center;
+  animation: avatarPulse 2.4s ease-in-out infinite;
+}
+.viz-avatar-pulse--right { animation-delay: 1.2s; }
+@keyframes avatarPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* === Step 3 animation: checkmark drawing in === */
+.viz-check-circle {
+  transform-origin: center;
+  animation: checkPop 4s ease-in-out infinite;
+}
+@keyframes checkPop {
+  0%, 30% { transform: scale(0); opacity: 0; }
+  40% { transform: scale(1.1); opacity: 1; }
+  50%, 100% { transform: scale(1); opacity: 1; }
+}
+.viz-check-path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: drawCheck 4s ease-in-out infinite;
+}
+@keyframes drawCheck {
+  0%, 40% { stroke-dashoffset: 50; }
+  60% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+.viz-sparkle {
+  transform-origin: center;
+  animation: sparkleSpin 4s ease-in-out infinite;
+  opacity: 0;
+}
+.viz-sparkle--1 { animation-delay: 0.6s; }
+.viz-sparkle--2 { animation-delay: 0.8s; }
+@keyframes sparkleSpin {
+  0%, 50% { opacity: 0; transform: scale(0); }
+  60% { opacity: 1; transform: scale(1) rotate(45deg); }
+  80% { opacity: 0.6; transform: scale(0.9) rotate(90deg); }
+  100% { opacity: 0; transform: scale(0) rotate(180deg); }
 }
 
 /* ===== OFICIOS GRID ===== */
@@ -901,6 +998,158 @@ section { position: relative; }
   color: rgba(244, 239, 230, 0.65);
   font-size: 14.5px;
   line-height: 1.5;
+}
+
+/* ===== COMPARADOR (Sin SUMO vs Con SUMO) ===== */
+.compare {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--cream-soft);
+}
+.compare__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.compare__col-head {
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.compare__col-head--bad {
+  background: var(--cream-soft);
+  color: var(--mute);
+}
+.compare__col-head--good {
+  background: var(--ink);
+  color: var(--cream);
+}
+.compare__col-head h3 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+.compare__col-head--good h3 em {
+  font-style: italic;
+  color: var(--blue);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.compare__tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.compare__col-head--bad .compare__tag {
+  background: rgba(15, 14, 12, 0.08);
+  color: var(--ink-soft);
+}
+.compare__col-head--good .compare__tag {
+  background: var(--blue);
+  color: var(--ink);
+}
+
+.compare__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.compare__row:last-child { border-bottom: none; }
+.compare__row::before {
+  content: "VS";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+  background: var(--cream);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.compare__cell {
+  padding: 24px 36px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 15.5px;
+  min-height: 78px;
+}
+.compare__cell--bad {
+  background: var(--cream-soft);
+  color: var(--mute);
+  text-decoration: line-through;
+  text-decoration-color: rgba(122, 111, 90, 0.4);
+  text-decoration-thickness: 1.5px;
+}
+.compare__cell--good {
+  background: var(--cream);
+  color: var(--ink);
+  font-weight: 500;
+}
+.compare__cell strong {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.compare__cell--bad strong {
+  color: var(--ink-soft);
+}
+.compare__cell--good strong {
+  color: var(--blue-deep);
+  font-weight: 600;
+}
+.compare__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.compare__icon--bad {
+  background: rgba(15, 14, 12, 0.08);
+  color: var(--mute);
+}
+.compare__icon--good {
+  background: var(--blue);
+  color: var(--ink);
+}
+.compare__icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 720px) {
+  .compare__head { grid-template-columns: 1fr; }
+  .compare__col-head { padding: 20px 24px; }
+  .compare__col-head--bad { border-bottom: 1px solid var(--line); }
+  .compare__col-head h3 { font-size: 22px; }
+  .compare__row { grid-template-columns: 1fr; border-bottom: none; }
+  .compare__row::before { display: none; }
+  .compare__cell { padding: 18px 24px; min-height: 0; font-size: 14.5px; }
+  .compare__cell--bad { border-bottom: 1px dashed var(--line); }
+  .compare__cell--good { border-bottom: 1px solid var(--line); }
+  .compare__row:last-child .compare__cell--good { border-bottom: none; }
 }
 
 /* ===== TESTIMONIALS ===== */
@@ -1266,6 +1515,85 @@ section { position: relative; }
   font-size: 22px;
 }
 
+/* ===== FAQ ===== */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 32px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 760px) { .faq-grid { grid-template-columns: 1fr; gap: 0; } }
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+  cursor: pointer;
+  position: relative;
+  transition: padding 0.3s ease;
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker { content: ""; }
+.faq-item:hover summary { color: var(--blue-deep); }
+.faq-item[open] summary { color: var(--ink); }
+
+.faq-item__chevron {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), background 0.3s, border-color 0.3s;
+  margin-top: 2px;
+}
+.faq-item__chevron svg {
+  width: 14px;
+  height: 14px;
+  color: var(--ink);
+  transition: color 0.3s;
+}
+.faq-item[open] .faq-item__chevron {
+  transform: rotate(45deg);
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.faq-item[open] .faq-item__chevron svg {
+  color: var(--ink);
+}
+
+.faq-item__answer {
+  padding-top: 16px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.6;
+  max-width: 580px;
+  animation: faqReveal 0.4s ease-out;
+}
+.faq-item__answer strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+@keyframes faqReveal {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== DOWNLOAD CTA ===== */
 .download {
   background: var(--cream-soft);
@@ -1308,7 +1636,32 @@ section { position: relative; }
   color: var(--ink-soft);
   font-size: 18px;
   max-width: 520px;
-  margin: 0 auto 40px;
+  margin: 0 auto 28px;
+}
+.download p strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.download-trust {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin: 0 auto 36px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.download-trust span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.download-trust svg {
+  color: var(--blue-deep);
+  flex-shrink: 0;
 }
 .store-badges {
   display: flex;
@@ -1505,6 +1858,7 @@ footer {
       <a href="#como">Cómo funciona</a>
       <a href="#oficios">Oficios</a>
       <a href="#zonas">Zonas</a>
+      <a href="#faq">FAQ</a>
       <a href="#pros">Para profesionales</a>
     </nav>
     <a href="#descarga" class="nav__logo-img" aria-label="Registrate gratis en SUMO" title="Registrate gratis"></a>
@@ -1520,8 +1874,8 @@ footer {
     <div class="hero__content">
       <div class="eyebrow reveal"><span class="dot"></span>Plataforma argentina · CABA · Neuquén · Rosario</div>
       <h1 class="hero__title reveal" style="transition-delay:0.1s">
-        El oficio que <em>necesitás</em>,
-        <span class="underline">a un toque</span> de distancia.
+        Encontrá el oficio que necesitás
+        <em>en <span class="underline">minutos.</span></em>
       </h1>
       <p class="hero__sub reveal" style="transition-delay:0.2s">
         Encontrá <strong>plomeros, electricistas, carpinteros, pintores</strong> y otros oficios verificados, cerca tuyo. Pedís, te conectamos, y resolvés en minutos. <strong>Sin grupos de WhatsApp, sin desconfianza, sin vueltas.</strong>
@@ -1650,20 +2004,84 @@ footer {
       <p>Pensamos SUMO para que encontrar al profesional indicado sea tan fácil como pedir un café. Sin grupos de barrio, sin esperar respuestas, sin desconfianza.</p>
     </div>
     <div class="steps reveal">
+      <!-- STEP 1: Search animation -->
       <div class="step">
-        <svg class="step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="step__visual" aria-hidden="true">
+          <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Search bar -->
+            <rect x="20" y="30" width="160" height="40" rx="20" fill="var(--cream)" stroke="var(--line)" stroke-width="1.5"/>
+            <!-- Magnifying glass (animated float) -->
+            <g class="viz-magnify" transform="translate(38, 50)">
+              <circle cx="0" cy="0" r="7" fill="none" stroke="var(--ink)" stroke-width="2"/>
+              <line x1="5" y1="5" x2="10" y2="10" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <!-- Typing line -->
+            <line class="viz-search-line" x1="60" y1="50" x2="135" y2="50" stroke="var(--ink-soft)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Blinking cursor -->
+            <line class="viz-search-cursor" x1="138" y1="42" x2="138" y2="58" stroke="var(--blue)" stroke-width="2"/>
+            <!-- Floating tag pills -->
+            <rect x="55" y="10" width="28" height="12" rx="6" fill="var(--blue)" opacity="0.85"/>
+            <rect x="90" y="10" width="36" height="12" rx="6" fill="var(--ink)" opacity="0.6"/>
+            <rect x="58" y="80" width="24" height="12" rx="6" fill="var(--ink)" opacity="0.4"/>
+            <rect x="90" y="80" width="40" height="12" rx="6" fill="var(--blue)" opacity="0.5"/>
+          </svg>
+        </div>
         <div class="step__num">01</div>
         <h3>Decinos qué necesitás.</h3>
         <p>Abrís la app, elegís el oficio y describís el trabajo. Plomería, pintura, electricidad, lo que sea. Te toma 30 segundos.</p>
       </div>
+
+      <!-- STEP 2: Connection animation -->
       <div class="step">
-        <svg class="step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <div class="step__visual" aria-hidden="true">
+          <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left avatar (client) -->
+            <g class="viz-avatar-pulse" transform="translate(45, 50)">
+              <circle cx="0" cy="0" r="22" fill="var(--cream)" stroke="var(--ink)" stroke-width="1.5"/>
+              <circle cx="0" cy="-5" r="6" fill="var(--ink)"/>
+              <path d="M -10 10 Q 0 4 10 10 L 10 14 L -10 14 Z" fill="var(--ink)"/>
+            </g>
+            <!-- Right avatar (professional) -->
+            <g class="viz-avatar-pulse viz-avatar-pulse--right" transform="translate(155, 50)">
+              <circle cx="0" cy="0" r="22" fill="var(--blue)" stroke="var(--ink)" stroke-width="1.5"/>
+              <!-- Wrench icon for pro -->
+              <path d="M -7 -7 L -2 -2 M 5 5 L 9 9 M 9 9 a 3 3 0 1 0 -2 -2 z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <circle cx="-4" cy="-4" r="3" fill="none" stroke="var(--ink)" stroke-width="2"/>
+            </g>
+            <!-- Dashed connection line -->
+            <line x1="72" y1="50" x2="128" y2="50" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="3 4" opacity="0.4"/>
+            <!-- Traveling pulse dot -->
+            <circle class="viz-pulse-dot" cx="100" cy="50" r="5" fill="var(--blue)"/>
+          </svg>
+        </div>
         <div class="step__num">02</div>
         <h3>Te conectamos.</h3>
         <p>Nuestro sistema te empareja con profesionales verificados de tu zona, según disponibilidad, calificaciones y especialidad.</p>
       </div>
+
+      <!-- STEP 3: Done / checkmark animation -->
       <div class="step">
-        <svg class="step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <div class="step__visual" aria-hidden="true">
+          <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Soft halo -->
+            <circle cx="100" cy="50" r="40" fill="var(--blue)" opacity="0.12"/>
+            <!-- Main check circle -->
+            <g class="viz-check-circle">
+              <circle cx="100" cy="50" r="28" fill="var(--blue)"/>
+              <path class="viz-check-path" d="M 88 50 L 96 58 L 112 42" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <!-- Sparkles -->
+            <g class="viz-sparkle viz-sparkle--1" transform="translate(60, 30)">
+              <path d="M 0 -6 L 1.5 -1.5 L 6 0 L 1.5 1.5 L 0 6 L -1.5 1.5 L -6 0 L -1.5 -1.5 Z" fill="var(--ink)"/>
+            </g>
+            <g class="viz-sparkle viz-sparkle--2" transform="translate(145, 70)">
+              <path d="M 0 -5 L 1.2 -1.2 L 5 0 L 1.2 1.2 L 0 5 L -1.2 1.2 L -5 0 L -1.2 -1.2 Z" fill="var(--blue)"/>
+            </g>
+            <g class="viz-sparkle viz-sparkle--1" transform="translate(150, 25)">
+              <path d="M 0 -4 L 1 -1 L 4 0 L 1 1 L 0 4 L -1 1 L -4 0 L -1 -1 Z" fill="var(--ink)"/>
+            </g>
+          </svg>
+        </div>
         <div class="step__num">03</div>
         <h3>Listo. Resuelto.</h3>
         <p>Coordinás todo desde la app, calificás el trabajo y construís comunidad. Así de simple. Así de SUMO.</p>
@@ -1783,6 +2201,104 @@ footer {
             <h4>Match inteligente</h4>
             <p>Te conectamos según ubicación, disponibilidad y especialidad. Cero pérdida de tiempo.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARADOR ===== -->
+<section class="section-pad" style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span>Antes y después</div>
+      <h2>La diferencia entre <em>buscar</em> y <em>encontrar.</em></h2>
+      <p>Lo que cambia cuando dejás de pelearte con grupos de WhatsApp y empezás a usar SUMO.</p>
+    </div>
+    <div class="compare reveal">
+      <div class="compare__head">
+        <div class="compare__col-head compare__col-head--bad">
+          <h3>Sin SUMO</h3>
+          <span class="compare__tag">El método viejo</span>
+        </div>
+        <div class="compare__col-head compare__col-head--good">
+          <h3>Con <em>SUMO</em></h3>
+          <span class="compare__tag">A un toque</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span><strong>Días o semanas</strong> buscando en grupos del barrio</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span><strong>Minutos</strong> para encontrar al indicado</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>Recomendaciones <strong>anónimas</strong> y poco confiables</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span><strong>Reseñas reales</strong> de clientes verificados</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>No sabés <strong>a quién</strong> estás metiendo en tu casa</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Profesionales <strong>verificados</strong> con identidad chequeada</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>Coordinación por <strong>mil canales</strong> (WhatsApp, llamadas, mails)</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Todo en <strong>una sola app</strong>, con historial</span>
+        </div>
+      </div>
+
+      <div class="compare__row">
+        <div class="compare__cell compare__cell--bad">
+          <span class="compare__icon compare__icon--bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span>Pagás <strong>sin saber</strong> cómo va a quedar el trabajo</span>
+        </div>
+        <div class="compare__cell compare__cell--good">
+          <span class="compare__icon compare__icon--good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Calificás <strong>al final</strong> y construís comunidad</span>
         </div>
       </div>
     </div>
@@ -2008,14 +2524,111 @@ footer {
   </div>
 </section>
 
+<!-- ===== FAQ ===== -->
+<section id="faq" class="section-pad" style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span>Preguntas frecuentes</div>
+      <h2>Lo que <em>todos</em> nos preguntan.</h2>
+      <p>Si tenés más dudas, escribinos por Instagram o por mail. Te respondemos rápido.</p>
+    </div>
+    <div class="faq-grid reveal">
+      <details class="faq-item">
+        <summary>
+          ¿Es seguro contratar a alguien por SUMO?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          Sí. Cada profesional pasa por un <strong>proceso de verificación de identidad y oficio</strong> antes de poder ofrecer sus servicios. Además, cada trabajo recibe una calificación pública por parte del cliente, así que la reputación se construye a la vista de todos.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿Cuánto cuesta usar SUMO?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          <strong>Registrarte y usar la app es 100% gratis</strong>, tanto para clientes como para profesionales. No cobramos cuota mensual ni tenés que dejar tarjeta de crédito para empezar.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿Cómo se verifican los profesionales?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          Validamos <strong>identidad (DNI), datos de contacto y oficio</strong>. Los profesionales que ya hicieron trabajos también acumulan calificaciones reales de clientes verificados, lo que te da una capa adicional de confianza al elegir.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿Qué pasa si no quedo conforme con el trabajo?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          Tenés todo el historial de la conversación dentro de la app y podés <strong>calificar el trabajo y dejar tu reseña pública</strong>. Si hay un problema, nuestro equipo de soporte interviene para mediar entre las partes y encontrar la mejor solución.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿En qué zonas está disponible?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          Hoy operamos en <strong>CABA, Neuquén capital y Rosario centro</strong>. Estamos sumando ciudades nuevas todo el tiempo. Si querés que lleguemos a la tuya, escribinos por Instagram y dejanos saber.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿Cómo cobran los profesionales?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          El profesional acuerda directamente con el cliente <strong>el monto y la forma de pago</strong> (efectivo, transferencia, lo que prefieran). SUMO no se mete en medio de esa transacción ni cobra comisiones por trabajo cerrado.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿Soy profesional, cómo me sumo?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          Descargás la app desde Google Play o App Store, te registrás eligiendo "Profesional", subís tus datos para verificación y listo. <strong>En menos de 5 minutos</strong> ya podés empezar a recibir trabajos en tu zona.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          ¿Necesito tarjeta de crédito para registrarme?
+          <span class="faq-item__chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-item__answer">
+          <strong>No</strong>. Solamente necesitás tu mail o número de teléfono para crear la cuenta. No te pedimos datos de pago para usar la plataforma.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ===== DOWNLOAD CTA ===== -->
 <section id="descarga" class="section-pad" style="padding-top:0">
   <div class="container">
     <div class="download reveal">
       <div class="download__inner">
-        <div class="eyebrow"><span class="dot"></span>Descargá la app</div>
+        <div class="eyebrow"><span class="dot"></span>Disponible ahora en tu zona</div>
         <h2>Tu casa <em>arreglada</em> empieza acá.</h2>
-        <p>Registrate gratis en SUMO y resolvé en minutos lo que llevaba semanas.</p>
+        <p>Descargá la app y resolvé en minutos lo que llevaba semanas. <strong>Sin tarjeta de crédito. Sin esperar cola. Sin letra chica.</strong></p>
+        <div class="download-trust">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Gratis para siempre</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Sin tarjeta de crédito</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Te toma menos de 1 min</span>
+        </div>
         <div class="store-badges">
           <a href="https://apps.apple.com/ar/app/sumo-app/id6599842875" class="store-badge" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
@@ -2059,6 +2672,7 @@ footer {
           <li><a href="#como">Cómo funciona</a></li>
           <li><a href="#oficios">Oficios</a></li>
           <li><a href="#zonas">Zonas</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#pros">Para profesionales</a></li>
         </ul>
       </div>
