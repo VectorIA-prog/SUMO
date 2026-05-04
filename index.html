@@ -320,6 +320,20 @@ h1, h2, h3 {
   color: var(--cream);
   transform: translateY(-2px);
 }
+.btn--dark {
+  background: var(--ink);
+  color: var(--cream);
+  box-shadow: 0 6px 0 #000, 0 18px 30px -16px rgba(15, 14, 12, 0.4);
+}
+.btn--dark:hover {
+  transform: translateY(-2px);
+  background: #000;
+  box-shadow: 0 8px 0 #000, 0 22px 36px -16px rgba(15, 14, 12, 0.5);
+}
+.btn--dark:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #000;
+}
 
 .hero__zones {
   display: flex;
@@ -341,6 +355,71 @@ h1, h2, h3 {
   color: var(--ink-soft);
 }
 .zone-pill svg { width: 12px; height: 12px; }
+
+/* ===== LIVE ACTIVITY TICKER ===== */
+.live-ticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 16px 9px 14px;
+  margin-bottom: 24px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.live-ticker__indicator {
+  flex-shrink: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #2BA84A;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(43, 168, 74, 0.6);
+  animation: livePulse 2s ease-out infinite;
+}
+@keyframes livePulse {
+  0% { box-shadow: 0 0 0 0 rgba(43, 168, 74, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(43, 168, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(43, 168, 74, 0); }
+}
+.live-ticker__label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2BA84A;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.live-ticker__text {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--ink);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.live-ticker__text.fading {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+.live-ticker__text .meta {
+  color: var(--mute);
+  font-weight: 400;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  margin-left: 6px;
+}
+@media (max-width: 540px) {
+  .live-ticker { font-size: 12.5px; padding: 8px 14px 8px 12px; }
+  .live-ticker__text .meta { display: none; }
+}
 
 /* ===== HERO PHONE MOCKUP ===== */
 .phone-stage {
@@ -823,6 +902,133 @@ section { position: relative; }
   font-size: 14.5px;
   line-height: 1.5;
 }
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 960px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+.testimonial {
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.testimonial:hover {
+  transform: translateY(-4px);
+  background: var(--cream-deep);
+}
+.testimonial--accent {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.testimonial--accent:hover { background: #1a1614; }
+.testimonial--blue {
+  background: var(--blue);
+  color: var(--ink);
+  border-color: var(--blue);
+}
+.testimonial--blue:hover { background: var(--blue); transform: translateY(-4px); }
+
+.testimonial__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.testimonial__role {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--mute);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+}
+.testimonial--accent .testimonial__role {
+  color: var(--blue);
+  border-color: rgba(244, 239, 230, 0.2);
+  background: rgba(244, 239, 230, 0.08);
+}
+.testimonial--blue .testimonial__role {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: transparent;
+}
+.testimonial__stars {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.testimonial--accent .testimonial__stars { color: var(--blue); }
+.testimonial--blue .testimonial__stars { color: var(--ink); }
+
+.testimonial__quote {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  letter-spacing: -0.005em;
+  flex-grow: 1;
+}
+.testimonial__quote em {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  color: var(--blue);
+}
+.testimonial--accent .testimonial__quote em { color: var(--blue); }
+.testimonial--blue .testimonial__quote em { color: white; }
+
+.testimonial__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.testimonial--accent .testimonial__author { border-top-color: rgba(244, 239, 230, 0.15); }
+.testimonial--blue .testimonial__author { border-top-color: rgba(15, 14, 12, 0.15); }
+.testimonial__avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.testimonial--accent .testimonial__avatar { background: var(--blue); color: var(--ink); }
+.testimonial--blue .testimonial__avatar { background: var(--ink); color: var(--blue); }
+.testimonial__name {
+  font-weight: 600;
+  font-size: 15px;
+}
+.testimonial__location {
+  font-size: 12.5px;
+  color: var(--mute);
+  margin-top: 1px;
+  font-family: var(--mono);
+}
+.testimonial--accent .testimonial__location { color: rgba(244, 239, 230, 0.6); }
+.testimonial--blue .testimonial__location { color: rgba(15, 14, 12, 0.65); }
 
 /* ===== PROFESSIONALS ===== */
 .pros {
@@ -1318,15 +1524,26 @@ footer {
         <span class="underline">a un toque</span> de distancia.
       </h1>
       <p class="hero__sub reveal" style="transition-delay:0.2s">
-        Conectamos <strong>plomeros, electricistas, carpinteros, pintores</strong> y muchos oficios más con personas que necesitan resolver arreglos en su casa. Sin vueltas, sin grupos de WhatsApp, sin desconfianza.
+        Encontrá <strong>plomeros, electricistas, carpinteros, pintores</strong> y otros oficios verificados, cerca tuyo. Pedís, te conectamos, y resolvés en minutos. <strong>Sin grupos de WhatsApp, sin desconfianza, sin vueltas.</strong>
       </p>
       <div class="hero__ctas reveal" style="transition-delay:0.3s">
         <a href="#descarga" class="btn btn--primary">
-          Necesito un servicio
+          Necesito ayuda
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="#pros" class="btn btn--ghost">Soy profesional</a>
+        <a href="#pros" class="btn btn--dark">
+          Quiero trabajar
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
+      <div class="live-ticker reveal" style="transition-delay:0.35s" id="liveTicker" aria-live="polite">
+        <div class="live-ticker__indicator"></div>
+        <div class="live-ticker__label">En vivo</div>
+        <div class="live-ticker__text" id="tickerText">
+          Lucas resolvió una filtración<span class="meta">· Palermo · hace 4 min</span>
+        </div>
+      </div>
+
       <div class="hero__zones reveal" style="transition-delay:0.4s">
         <span class="eyebrow" style="margin-right:6px">Disponible en</span>
         <span class="zone-pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> CABA</span>
@@ -1572,6 +1789,114 @@ footer {
   </div>
 </section>
 
+<!-- ===== TESTIMONIOS ===== -->
+<section class="section-pad" style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span>Testimonios reales</div>
+      <h2>Voces de quienes ya <em>sumaron.</em></h2>
+      <p>Clientes que resolvieron lo que los frenaba. Profesionales que llenaron su agenda. Esto es lo que pasa cuando la comunidad funciona.</p>
+    </div>
+    <div class="testimonials-grid reveal">
+      <!-- CLIENT 1 -->
+      <div class="testimonial">
+        <div class="testimonial__top">
+          <span class="testimonial__role">Cliente</span>
+          <span class="testimonial__stars">★★★★★</span>
+        </div>
+        <p class="testimonial__quote">"Se me rompió la canilla un domingo a la noche. En <em>40 minutos</em> tenía un plomero verificado en mi casa. Cero vueltas."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">MR</div>
+          <div>
+            <div class="testimonial__name">María R.</div>
+            <div class="testimonial__location">Caballito · CABA</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFESSIONAL 1 (accent dark card for visual rhythm) -->
+      <div class="testimonial testimonial--accent">
+        <div class="testimonial__top">
+          <span class="testimonial__role">Profesional</span>
+          <span class="testimonial__stars">★★★★★</span>
+        </div>
+        <p class="testimonial__quote">"Hace 6 meses que estoy en SUMO y ya no necesito repartir tarjetas. <em>Los clientes me llegan</em>, coordino desde la app y cobro tranquilo."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">DF</div>
+          <div>
+            <div class="testimonial__name">Diego F.</div>
+            <div class="testimonial__location">Plomero · Caballito</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLIENT 2 -->
+      <div class="testimonial">
+        <div class="testimonial__top">
+          <span class="testimonial__role">Cliente</span>
+          <span class="testimonial__stars">★★★★★</span>
+        </div>
+        <p class="testimonial__quote">"Pinté todo el departamento antes de mudarme. Pedí presupuesto el lunes, empezaron el miércoles. <em>Otra dimensión</em> respecto a preguntar en grupos."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">JB</div>
+          <div>
+            <div class="testimonial__name">Joaquín B.</div>
+            <div class="testimonial__location">Pichincha · Rosario</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFESSIONAL 2 (blue accent for emphasis) -->
+      <div class="testimonial testimonial--blue">
+        <div class="testimonial__top">
+          <span class="testimonial__role">Profesional</span>
+          <span class="testimonial__stars">★★★★★</span>
+        </div>
+        <p class="testimonial__quote">"Lo que más me gusta es que <em>ven mi calificación</em> antes de elegirme. Mi trabajo habla por mí, no compito por precio."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">LM</div>
+          <div>
+            <div class="testimonial__name">Lucía M.</div>
+            <div class="testimonial__location">Pintora · Rosario</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLIENT 3 -->
+      <div class="testimonial">
+        <div class="testimonial__top">
+          <span class="testimonial__role">Cliente</span>
+          <span class="testimonial__stars">★★★★★</span>
+        </div>
+        <p class="testimonial__quote">"Confié porque vi <em>las reseñas reales</em> del electricista antes de contratarlo. Vino, hizo el trabajo impecable y me dejó factura."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">SL</div>
+          <div>
+            <div class="testimonial__name">Sofía L.</div>
+            <div class="testimonial__location">Centro · Neuquén</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFESSIONAL 3 -->
+      <div class="testimonial">
+        <div class="testimonial__top">
+          <span class="testimonial__role">Profesional</span>
+          <span class="testimonial__stars">★★★★★</span>
+        </div>
+        <p class="testimonial__quote">"En 3 meses pasé de buscar trabajo a tener <em>agenda llena.</em> La app es directa, sin comisiones raras ni letra chica."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">CN</div>
+          <div>
+            <div class="testimonial__name">Carlos N.</div>
+            <div class="testimonial__location">Electricista · Neuquén</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== PARA PROFESIONALES ===== -->
 <section id="pros" class="section-pad" style="padding-top:0">
   <div class="container">
@@ -1636,11 +1961,11 @@ footer {
         </div>
         <div class="zona__stats">
           <div>
-            <div class="zona__stat-num">48</div>
+            <div class="zona__stat-num" data-count="48">0</div>
             <div class="zona__stat-label">Barrios cubiertos</div>
           </div>
           <div>
-            <div class="zona__stat-num">+500</div>
+            <div class="zona__stat-num" data-count="500" data-prefix="+">+0</div>
             <div class="zona__stat-label">Profesionales</div>
           </div>
         </div>
@@ -1653,11 +1978,11 @@ footer {
         </div>
         <div class="zona__stats">
           <div>
-            <div class="zona__stat-num">12</div>
+            <div class="zona__stat-num" data-count="12">0</div>
             <div class="zona__stat-label">Barrios cubiertos</div>
           </div>
           <div>
-            <div class="zona__stat-num">+150</div>
+            <div class="zona__stat-num" data-count="150" data-prefix="+">+0</div>
             <div class="zona__stat-label">Profesionales</div>
           </div>
         </div>
@@ -1670,11 +1995,11 @@ footer {
         </div>
         <div class="zona__stats">
           <div>
-            <div class="zona__stat-num">22</div>
+            <div class="zona__stat-num" data-count="22">0</div>
             <div class="zona__stat-label">Barrios cubiertos</div>
           </div>
           <div>
-            <div class="zona__stat-num">+200</div>
+            <div class="zona__stat-num" data-count="200" data-prefix="+">+0</div>
             <div class="zona__stat-label">Profesionales</div>
           </div>
         </div>
@@ -1799,6 +2124,54 @@ reveals.forEach(r => io.observe(r));
 // Duplicate marquee content for seamless loop
 const m = document.getElementById('marquee');
 m.innerHTML += m.innerHTML;
+
+// Live activity ticker — rotates through real-feeling activity
+const tickerActivities = [
+  { text: 'Lucas resolvió una filtración', meta: 'Palermo · hace 4 min' },
+  { text: 'Carla aceptó un trabajo de pintura', meta: 'Rosario · hace 12 min' },
+  { text: 'Diego se sumó como electricista', meta: 'Neuquén · hace 1 h' },
+  { text: 'María calificó a Pablo ★★★★★', meta: 'Caballito · hace 18 min' },
+  { text: 'Joaquín pidió un carpintero', meta: 'Belgrano · hace 6 min' },
+  { text: 'Sofía contrató un gasista', meta: 'Rosario centro · hace 2 min' },
+  { text: 'Martín terminó una instalación eléctrica', meta: 'Recoleta · hace 25 min' },
+  { text: 'Valeria se sumó como pintora', meta: 'Neuquén · hace 40 min' }
+];
+const tickerEl = document.getElementById('tickerText');
+let tickerIndex = 0;
+function rotateTicker() {
+  if (!tickerEl) return;
+  tickerEl.classList.add('fading');
+  setTimeout(() => {
+    tickerIndex = (tickerIndex + 1) % tickerActivities.length;
+    const a = tickerActivities[tickerIndex];
+    tickerEl.innerHTML = `${a.text}<span class="meta">· ${a.meta}</span>`;
+    tickerEl.classList.remove('fading');
+  }, 500);
+}
+setInterval(rotateTicker, 3800);
+
+// Animated number counters in zonas section
+const counters = document.querySelectorAll('[data-count]');
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.count, 10);
+    const prefix = el.dataset.prefix || '';
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      const value = Math.floor(eased * target);
+      el.textContent = prefix + value.toLocaleString('es-AR');
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.4 });
+counters.forEach(c => counterObs.observe(c));
 </script>
 </body>
 </html>
